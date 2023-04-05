@@ -103,9 +103,12 @@ function addProduct(product) {
                                   isLoggedIn ? "" : "h-25"
                                 }">${desc}</p>
                               <div class="buyNow"> 
-                                  <a class="btn btn-primary mx-1 editBtn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="editBtn(${
+                                  <a class="btn btn-primary mx-1 editBtnFavourite" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="editBtn(${
                                     product.productId
                                   })">Buy Now</a>
+                                  <a class="btn btn-danger mx-1 deleteBtnFavourite" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="removeFavourite(${
+                                    product.productId
+                                  })">Remove</a>
                                   </div>
                           </div>`;
 
@@ -113,7 +116,7 @@ function addProduct(product) {
 }
 
 if (favouriteProducts.length === 0) {
-  productItemDiv.innerHTML = `<div class="text-center">
+  productItemDiv.innerHTML = `<div class="w-100 text-center">
     <img src="assets/empty-cart.webp" class="emptyCartImage">
     <h3 class="text-center w-100 favouriteh3"> Favourite Product List is Empty!</h3>
     <p class="favouritePara">Please add your favourite product.</p>
@@ -128,4 +131,21 @@ if (favouriteProducts.length === 0) {
     });
   }
   document.addEventListener("load", loadContent());
+}
+
+// Remove Favourite
+function removeFavourite(id) {
+  let index = getProduct.findIndex((product) => product.productId == id);
+  getProduct[index]["isFavourite"] = false;
+  usersData[loginUser["email"]] = getProduct;
+
+  let newFavourite = favouriteProducts.filter(
+    (product) => product.productId != id
+  );
+
+  localStorage.setItem("userData", JSON.stringify(usersData));
+  localStorage.setItem("favouriteProducts", JSON.stringify(newFavourite));
+
+  loadContent();
+  location.reload();
 }

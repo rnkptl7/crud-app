@@ -16,7 +16,7 @@
 .cardImage {
   display: grid;
   place-items: center;
-  /* width: 100; */
+  height: 150px;
 }
 
 .card-body {
@@ -38,9 +38,14 @@
   top: -40px;
 }
 
-.buyNow a {
+.buyNow .deleteBtnFavourite {
   position: absolute;
   right: 0;
+}
+
+.buyNow .editBtnFavourite {
+  position: absolute;
+  left: 26%;
 }
 
 .wishListCount {
@@ -97,7 +102,6 @@
   right: 6%;
   z-index: 10;
   transition: 0.5s;
-  /* transform: translate(-50%, -50%); */
 }
 
 .priceParent {
