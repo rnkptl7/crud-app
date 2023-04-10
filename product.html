@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+
+<body>
+    <!-- Modal Login -->
+    <div class="modal fade" id="loginLogout" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                        <input type="email" class="form-control emailId" id="exampleFormControlInput1"
+                            placeholder="name@example.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Password</label>
+                        <input type="password" class="form-control password" id="exampleFormControlInput1">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary loginBtn" data-bs-dismiss="modal">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alertBox">
+
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark position-sticky top-0 z-2 shadow-lg">
+        <div class="container navSection">
+            <a class="navbar-brand text-white fw-semibold fs-3" href="/index.html">PMS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" aria-current="page" href="/index.html" id="addProduct">Add
+                            Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/product.html">Products</a>
+                    </li>
+                    <li class="nav-item wishList">
+                        <a class="nav-link text-white" href="/wishlist.html">Wish List <span
+                                class="wishListCount">0</span></a>
+                    </li>
+                    <li class="nav-item login bg-success rounded-2" data-bs-toggle="modal"
+                        data-bs-target="#loginLogout">
+                        <a class="nav-link active text-center" href="#">Login</a>
+                    </li>
+                    <li class="nav-item logout bg-danger rounded-2">
+                        <a class="nav-link active text-center" href="#">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Modal Edit Product-->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Product</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="my-4">
+                        <div class="mb-3">
+                            <label for="productIdModal" class="form-label">Product ID</label>
+                            <input type="number" class="form-control" id="productIdModal" required disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productNameModal" class="form-label">Product Name</label>
+                            <input type="text" class="form-control" id="productNameModal" required>
+                        </div>
+                        <div class="input-group mb-3 justify-content-between">
+                            <div class="priceParent">
+                                <div class="priceDiv">
+                                    <span class="input-group-text" id="basic-addon1">₹</span>
+                                    <input type="number" id="productPriceModal" class="form-control"
+                                        placeholder="Product Price" aria-label="productPrice"
+                                        aria-describedby="basic-addon1">
+                                </div>
+                                <input class="form-control" type="file" id="imageModal" multiple required>
+                            </div>
+                            <div class="imageDiv">
+                                <img id="imageShowModal" class="object-fit-cover" alt="">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="productDescModal" class="form-label">Product Descriptions</label>
+                            <textarea class="form-control" id="productDescModal" rows="3" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary addEditProduct" data-bs-dismiss="modal">Edit
+                        Product</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container p-5 main-content">
+        <div class="container d-flex mb-2">
+            <div class="d-flex w-100 bg-body-tertiary p-2 rounded-2 sortBar">
+                <div class="d-flex w-75">
+                    <p class="my-auto p-2 px-3 rounded-2">Sort By : </p>
+                    <div class="d-flex">
+                        <select class="form-select mx-2" aria-label="Default select example" id="sortBy">
+                            <option selected>Select</option>
+                            <option value="productName">Name</option>
+                            <option value="productId">ID</option>
+                            <option value="productPrice">Price</option>
+                        </select>
+                        <select class="form-select" aria-label="Default select example" id="ascDescOrder">
+                            <option value="desc">DESC</option>
+                            <option value="asc" selected>ASC</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="w-25 d-flex">
+                    <input class="form-control me-2 w-100" id="searchInput" type="search" placeholder="Search"
+                        aria-label="Search">
+                </div>
+            </div>
+        </div>
+        <div class="product-item d-flex flex-wrap justify-content-center"></div>
+        <div class="pagenumbers" id="pagination"></div>
+    </div>
+
+    <script src="scriptProduct.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
